@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.example.reddot
+testFramework: junit
+sourceLanguage: kotlin
+buildTool: gradle
+features: [ annotation-api, app-name, gradle, http-client, jib, junit, kotlin, kotlin-application, kubernetes, logback, management, netty-server, readme, shade, yaml ]
