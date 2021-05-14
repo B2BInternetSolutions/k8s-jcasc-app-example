@@ -8,17 +8,17 @@ pipeline {
 
   stages {
     stage('Build Gradle') { steps { container(name: 'gradle') { script {
-        sh ./gradlew build
+        sh "./gradlew build"
     } } } }
 
     stage('Build NPM') { steps { container(name: 'node') { script {
         dir('ui') {
-            sh npm ci install
+            sh "npm ci install"
         }
     } } } }
 
     stage('Build Docker') { steps { container(name: 'docker') { script {
-          sh docker build -t reddot:latest -f devops/Dockerfile .
+          sh "docker build -t reddot:latest -f devops/Dockerfile ."
     } } } }
   }
 }
