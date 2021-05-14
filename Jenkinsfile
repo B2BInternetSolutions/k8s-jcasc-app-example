@@ -12,7 +12,7 @@ pipeline {
     } } } }
 
     stage('Build NPM') { steps { container(name: 'node') { script {
-        dir('ui') {
+        dir('node-ui') {
             sh "npm ci install"
         }
     } } } }
