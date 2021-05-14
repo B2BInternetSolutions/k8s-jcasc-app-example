@@ -3,7 +3,7 @@ pipeline {
       buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
   }
   agent {
-      label 'gradle_node'
+      label 'gradle_java_node'
   }
 
   stages {
