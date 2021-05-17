@@ -23,7 +23,7 @@ pipeline {
 
     stage('Deploy: Dev') { steps { container(name: 'helm') { script {
         echo "delpoying..."
-        sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://localhost/jenkins/view/Demo%20deploy/job/Deploy%20DEMO%20dev/build?token=6f33625a-667e-4043-97f5-a8341eb3fa4b"
+        sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://jenkins-controller:8080/jenkins/view/Demo%20deploy/job/Deploy%20DEMO%20dev/build?token=6f33625a-667e-4043-97f5-a8341eb3fa4b"
     } } } }
   }
 }
