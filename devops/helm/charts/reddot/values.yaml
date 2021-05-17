@@ -8,8 +8,19 @@ image:
   tag: "latest"
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "reddot-app" # changed for having a good name
+fullnameOverride: "reddot-app" # changed for having a good name
+
+# CHANGED: Adding some configs for application deployment
+reddot:
+  env:
+    ports:
+      containerPort: 80
+    appname: reddot-general
+
+# CHANGED: adding setup for port
+#service:
+#  port: 8080
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -48,7 +59,7 @@ ingress:
       - path: /
         backend:
           serviceName: chart-example.local
-          servicePort: 80
+          servicePort: 8080
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -78,3 +89,4 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+

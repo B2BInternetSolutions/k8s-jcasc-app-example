@@ -20,5 +20,9 @@ pipeline {
     stage('Build Docker') { steps { container(name: 'docker') { script {
           sh "docker build -t reddot:latest -f devops/Dockerfile ."
     } } } }
+
+    stage('Deploy: Dev') { steps { container(name: 'helm') { script {
+        echo "delpoying"
+    } } } }
   }
 }

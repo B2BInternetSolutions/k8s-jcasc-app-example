@@ -33,9 +33,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # CHANGED: added possible env variables here
+          env:
+            - name: REDDOT_ENV_APPNAME
+              value: "{{ .Values.reddot.env.appname }}"
           ports:
             - name: http
-              containerPort: 80
+              # CHANGED: to setup the default container port
+              containerPort: {{ .Values.reddot.env.ports.containerPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
