@@ -18,7 +18,7 @@ pipeline {
     } } } }
 
     stage('Build Docker') { steps { container(name: 'docker') { script {
-        withCredentials([usernamePassword(credentialsId: 'gcr-docker-login', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USR')]) {
+        withCredentials([usernamePassword(credentialsId: 'github-gcr-docker-login', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USR')]) {
             sh "echo ${DOCKER_PWD} | docker login ghcr.io -u ${DOCKER_PWD} --password-stdin"
         }
 
@@ -29,8 +29,19 @@ pipeline {
     } } } }
 
     stage('Deploy: Dev') { steps { container(name: 'helm') { script {
-        echo "delpoying..."
+        echo "deploying..."
         sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://jenkins-controller:8080/jenkins/view/Demo%20deploy/job/Deploy%20DEMO%20dev/build?token=6f33625a-667e-4043-97f5-a8341eb3fa4b"
     } } } }
+
+    stage('Test E2E: Dev') { steps { container(name: 'helm') { script {
+        // imaging, that we are testing something here
+        sleep(10000)
+    } } } }
+
+    stage('Undeploy: Dev') { steps { container(name: 'helm') { script {
+        echo "Undeploying..."
+        sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://jenkins-controller:8080/jenkins/view/Demo%20deploy/job/Undeploy%20DEMO%20dev/build?token=e858d2ac-e4b7-45ff-827c-8ce58e9f7dea"
+    } } } }
+
   }
 }
