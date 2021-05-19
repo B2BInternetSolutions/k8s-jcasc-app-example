@@ -19,8 +19,8 @@ pipeline {
 
     stage('Build Docker') { steps { container(name: 'docker') { script {
           sh "docker build -t reddot:latest -f devops/Dockerfile ."
-          sh "docker image tag reddot:latest docker-registry.demo.svc.cluster.local/registry/reddot/reddot:latest"
-          sh "docker image push docker-registry.demo.svc.cluster.local/registry/reddot/reddot:latest"
+          sh "docker image tag reddot:latest docker-registry.demo.svc.cluster.local:5000/reddot/reddot:latest"
+          sh "docker image push docker-registry.demo.svc.cluster.local:5000/reddot/reddot:latest"
     } } } }
 
     stage('Deploy: Dev') { steps { container(name: 'helm') { script {
