@@ -18,13 +18,14 @@ pipeline {
     } } } }
 
     stage('Build Docker') { steps { container(name: 'docker') { script {
-        // Setup an insecure registry for the demo case
-        echo "{ \"insecure-registries\" : [\"docker-registry.demo.svc.cluster.local:5000\"] }" > /etc/docker/daemon.json
+        withCredentials([usernamePassword(credentialsId: 'gcr-docker-login', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USR')]) {
+            sh "echo ${DOCKER_PWD} | docker login ghcr.io -u ${DOCKER_PWD} --password-stdin"
+        }
 
         // build and push the image
         sh "docker build -t reddot:latest -f devops/Dockerfile ."
-        sh "docker image tag reddot:latest docker-registry.demo.svc.cluster.local:5000/reddot/reddot:latest"
-        sh "docker image push docker-registry.demo.svc.cluster.local:5000/reddot/reddot:latest"
+        sh "docker image tag reddot:latest ghcr.io/ragin-lundf/k8s-jcasc-app-example/reddot/reddot:latest"
+        sh "docker image push ghcr.io/ragin-lundf/k8s-jcasc-app-example/reddot/reddot/reddot:latest"
     } } } }
 
     stage('Deploy: Dev') { steps { container(name: 'helm') { script {
