@@ -15,7 +15,7 @@ fullnameOverride: "reddot-app" # changed for having a good name
 reddot:
   env:
     ports:
-      containerPort: 80
+      containerPort: 8080
     appname: reddot-general
 
 # CHANGED: adding setup for port
@@ -46,7 +46,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false
