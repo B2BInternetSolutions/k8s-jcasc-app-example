@@ -8,7 +8,7 @@ pipeline {
 
   stages {
     stage('Build Gradle') { steps { container(name: 'gradle') { script {
-        sh "./gradlew build"
+        sh "gradle build"
     } } } }
 
     stage('Build NPM') { steps { container(name: 'node') { script {
