@@ -25,7 +25,7 @@ pipeline {
         // build and push the image
         sh "docker build -t reddot:latest -f devops/Dockerfile ."
         sh "docker image tag reddot:latest ghcr.io/ragin-lundf/k8s-jcasc-app-example/reddot/reddot:latest"
-        sh "docker image push ghcr.io/ragin-lundf/k8s-jcasc-app-example/reddot/reddot/reddot:latest"
+        sh "docker image push ghcr.io/ragin-lundf/k8s-jcasc-app-example/reddot/reddot:latest"
     } } } }
 
     stage('Deploy: Dev') { steps { container(name: 'helm') { script {
