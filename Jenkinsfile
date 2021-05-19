@@ -28,20 +28,22 @@ pipeline {
         sh "docker image push ghcr.io/ragin-lundf/k8s-jcasc-app-example/reddot/reddot:latest"
     } } } }
 
+// --- This is only a simple example for a deployment. For regular deployments, please use the
+// --- https://www.jenkins.io/doc/pipeline/steps/Parameterized-Remote-Trigger/ plugin
     stage('Deploy: Dev') { steps { container(name: 'helm') { script {
         echo "deploying..."
         sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://jenkins-controller:8080/jenkins/view/Demo%20deploy/job/Deploy%20DEMO%20dev/build?token=6f33625a-667e-4043-97f5-a8341eb3fa4b"
     } } } }
 
-    stage('Test E2E: Dev') { steps { container(name: 'helm') { script {
-        // imaging, that we are testing something here
-        sleep(60)
-    } } } }
+//    stage('Test E2E: Dev') { steps { container(name: 'helm') { script {
+//        // imaging, that we are testing something here
+//        sleep(60)
+//    } } } }
 
-    stage('Undeploy: Dev') { steps { container(name: 'helm') { script {
-        echo "Undeploying..."
-        sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://jenkins-controller:8080/jenkins/view/Demo%20deploy/job/Undeploy%20DEMO%20dev/build?token=e858d2ac-e4b7-45ff-827c-8ce58e9f7dea"
-    } } } }
+//    stage('Undeploy: Dev') { steps { container(name: 'helm') { script {
+//        echo "Undeploying..."
+//        sh "wget --auth-no-challenge --http-user=admin --http-password=admin http://jenkins-controller:8080/jenkins/view/Demo%20deploy/job/Undeploy%20DEMO%20dev/build?token=e858d2ac-e4b7-45ff-827c-8ce58e9f7dea"
+//    } } } }
 
   }
 }
