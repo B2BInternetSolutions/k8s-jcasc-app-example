@@ -1,0 +1,10 @@
+{{- if .Values.configmaps }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "reddot.name" . }}-configmap
+data:
+  {{- range .Values.configmaps }}
+  {{- (print .name ": \"" .value "\"") | nindent 2}}
+  {{- end }}
+  {{- end }}

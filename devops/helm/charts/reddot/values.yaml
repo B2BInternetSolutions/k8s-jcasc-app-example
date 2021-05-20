@@ -12,15 +12,13 @@ nameOverride: "reddot-app" # changed for having a good name
 fullnameOverride: "reddot-app" # changed for having a good name
 
 # CHANGED: Adding some configs for application deployment
-reddot:
-  env:
-    ports:
-      containerPort: 8080
-    appname: reddot-general
+configmaps:
+  - name: "REDDOT_APPNAME"
+    value: "general-app"
 
-# CHANGED: adding setup for port
-#service:
-#  port: 8080
+reddot:
+  ports:
+    containerPort: 8080
 
 serviceAccount:
   # Specifies whether a service account should be created
